@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "tlnguyen-com-demo.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  tls:
+    - hosts:
+        - demo.tlnguyen.com
+      secretName: demo.tlnguyen.com
+  rules:
+    - host: demo.tlnguyen.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: 80
