@@ -4,16 +4,15 @@ metadata:
   name: {{ include "tlnguyen-com-demo.fullname" . }}
   labels:
     {{- include "tlnguyen-com-demo.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   tls:
     - hosts:
-        - demo.tlnguyen.com
-      secretName: demo.tlnguyen.com
+        - {{ .Values.ingress.host }}
+      secretName: {{ .Values.ingress.host }}
   rules:
-    - host: demo.tlnguyen.com
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
           - path: /
@@ -22,4 +21,4 @@ spec:
               service:
                 name: {{ include "tlnguyen-com-demo.fullname" . }}
                 port:
-                  number: 80
+                  number: {{ .Values.service.port }}
