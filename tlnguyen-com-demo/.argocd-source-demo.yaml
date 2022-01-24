@@ -1,0 +1,8 @@
+helm:
+  parameters:
+  - name: image.name
+    value: tlnguyen/tlnguyen-com-demo
+    forcestring: true
+  - name: image.tag
+    value: d07ec9a
+    forcestring: true
