@@ -4,5 +4,5 @@ helm:
     value: tlnguyen/tlnguyen-com-demo
     forcestring: true
   - name: image.tag
-    value: e1bcaa8
+    value: e39613f
     forcestring: true
